@@ -1,6 +1,34 @@
-import React from "react";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { connect } from "react-redux";
+import { addTask } from "../actions";
 
-export default function Navbar() {
+export function Navbar(props) {
+  const [open, setOpen] = React.useState(false);
+  const [task, setTask] = React.useState("");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleAdd = () => {
+    handleClose();
+
+    if (task !== "") {
+      // dispatch add new task action
+      console.log(task);
+      props.addTask(task);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="nav">
       {true && (
@@ -12,11 +40,36 @@ export default function Navbar() {
         <div className="heading">Trackify@Habbit</div>
       </div>
 
-      {true && (
-        <div className="actions-div">
-          <button className="add">+ Add Habbit</button>
-        </div>
-      )}
+      <div>
+        <Button variant="contained" onClick={handleClickOpen}>
+          Add New Task
+        </Button>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Add New Task</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="New Task"
+              type="email"
+              fullWidth
+              variant="standard"
+              onChange={e => setTask(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleAdd}>Add</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(mapStateToProps, { addTask })(Navbar);
