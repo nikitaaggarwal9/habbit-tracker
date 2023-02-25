@@ -5,12 +5,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { connect } from "react-redux";
 import { addTask } from "../actions";
+import { useDispatch } from "react-redux";
 
-export function Navbar(props) {
+export default function Navbar(props) {
   const [open, setOpen] = React.useState(false);
   const [task, setTask] = React.useState("");
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,7 +22,9 @@ export function Navbar(props) {
     if (task !== "") {
       // dispatch add new task action
       console.log(task);
-      props.addTask(task);
+      // props.addTask(task);
+
+      dispatch(addTask(task));
     }
   };
 
@@ -67,9 +70,3 @@ export function Navbar(props) {
     </div>
   );
 }
-
-const mapStateToProps = state => {
-  return state;
-};
-
-export default connect(mapStateToProps, { addTask })(Navbar);

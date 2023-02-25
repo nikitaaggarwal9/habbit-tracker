@@ -1,17 +1,19 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useSelector } from "react-redux";
 import HabbitCard from "./components/HabbitCard";
 import Navbar from "./components/Navbar";
 
 function App(props) {
-  const { store } = props;
-  console.log(props, store);
+  // const { tasks } = props.state;
+  const tasks = useSelector(state => state.tasks);
+  console.log(tasks);
   return (
     <div className="App">
       <Navbar />
       <div className="habbits">
-        {/* {tasks.length > 0 ? tasks.map(task => 
+        {tasks.length > 0 ? tasks.map(task => 
           <HabbitCard task={task}/>
-        ) : ''} */}
+        ) : ''}
 
         {/* <HabbitCard task={"alsdkf"} />
         <HabbitCard task={"dfkvm"} />

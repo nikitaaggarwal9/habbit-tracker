@@ -25,15 +25,15 @@ export function tasks(state = initialTasksState, action) {
   }
 }
 
-const initialRootState = {
-  tasks: initialTasksState,
-};
+// const initialRootState = {
+//   tasks: initialTasksState,
+// };
 
-export default function rootReducer(state = initialRootState, action) {
-  return {
-    tasks: tasks(state.tasks, action),
-  }
-}
+// export default function rootReducer(state = initialRootState, action) {
+//   return {
+    
+//   }
+// }
 
 // export default initialTasksState;
 
